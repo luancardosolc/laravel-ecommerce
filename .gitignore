@@ -1,1 +1,6 @@
+/docker/mysql-data
+/docker/nginx/logs
+
 .idea
+vscode
+.DS_Store
