@@ -45,10 +45,14 @@ services:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     ports:
       - "3306:3306"
+    expose:
+      - "3306"
     environment:
       MYSQL_DATABASE: ecommerce
-      MYSQL_ROOT_PASSWORD: hardpassword
+      MYSQL_ROOT_PASSWORD: HardPassword@4657
       MYSQL_TCP_PORT: 3306
+      MYSQL_USER: ecommerce
+      MYSQL_PASSWORD: HardPassword@4657
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
