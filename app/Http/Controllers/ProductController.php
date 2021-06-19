@@ -76,4 +76,14 @@ class ProductController extends Controller
 
         return new CustomResponse('Product has been deleted');
     }
+
+    /**
+     * @param string $name
+     * @return Response
+     */
+    public function search(string $name): Response
+    {
+        $products = Product::where('name', 'like', '%'.$name.'%')->get();
+        return new CustomResponse('Success',true, $products);
+    }
 }
