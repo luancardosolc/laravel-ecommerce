@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\CustomResponse;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,10 +40,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
-    public function show($id): Response
+    public function show(int $id): Response
     {
         return Response(Product::find($id));
     }
@@ -51,10 +52,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id): Response
+    public function update(Request $request, int $id): Response
     {
         $product = Product::find($id);
         $product->update($request->all());
@@ -64,11 +65,15 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param int $id
+     * @return CustomResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): CustomResponse
     {
-        //
+        if (!Product::destroy($id)){
+            return new CustomResponse('Failed to delete the product', false);
+        }
+
+        return new CustomResponse('Product has been deleted');
     }
 }
