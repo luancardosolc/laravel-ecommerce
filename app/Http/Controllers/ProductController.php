@@ -34,7 +34,7 @@ class ProductController extends Controller
             'price' => 'required',
         ]);
 
-        return Response(Product::create($request->all()));
+        return Response(Product::create($request->all()), 201);
     }
 
     /**
