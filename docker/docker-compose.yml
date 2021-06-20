@@ -12,9 +12,6 @@ services:
     volumes:
       - ../:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-    environment:
-      SERVICE_NAME: app
-      SERVICE_TAGS: dev
     working_dir: /var/www
     networks:
       - app-network
@@ -53,8 +50,6 @@ services:
       MYSQL_TCP_PORT: 3306
       MYSQL_USER: ecommerce
       MYSQL_PASSWORD: HardPassword@4657
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
     networks:
       - app-network
 
