@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\CustomResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -20,6 +22,30 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
+
+        $token = $user->createToken('myhardtoken')->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return Response($response, 201);
+    }
+
+    public function login(Request $request )
+    {
+        $fields = $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        $user = User::where('email',$fields['email'])->first();
+
+        if(!$user || !Hash::check($fields['password'], $user->password))
+        {
+            return new CustomResponse('Failed to login',false, [], 401);
+        }
 
         $token = $user->createToken('myhardtoken')->plainTextToken;
 
