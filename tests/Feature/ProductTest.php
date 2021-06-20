@@ -20,7 +20,6 @@ class ProductTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        //Logar para poder fazer insert
         $login = $this->post('/api/register', [
             'name' => 'User 001',
             'email' => 'user001@teste.com',
