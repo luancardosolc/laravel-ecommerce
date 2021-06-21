@@ -15,7 +15,7 @@
     "servers": [
         {
             "url": "http://localhost/api",
-            "description": "Demo API Server"
+            "description": "Ecommerce API Server"
         }
     ],
     "paths": {

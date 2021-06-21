@@ -33,7 +33,7 @@ class Controller extends BaseController
      *
      * @OA\Server(
      *      url="http://localhost/api",
-     *      description="Demo API Server"
+     *      description="Ecommerce API Server"
      * )
      *
      * @OA\Tag(
