@@ -36,6 +36,12 @@ Run the tests:
 
     php artisan test
 
-## Swagger
+## Swagger / OpenAPI
 
-    //TODO
+Accessing swagger:
+
+    http://localhost/api/documentation
+
+Regenerating Docs:
+    
+    php artisan l5-swagger:generate
