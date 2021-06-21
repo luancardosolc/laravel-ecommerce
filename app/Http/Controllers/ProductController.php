@@ -10,9 +10,26 @@ use Illuminate\Http\Response;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
+     * @OA\Get(
+     *      path="/products",
+     *      operationId="getProductsList",
+     *      tags={"Products"},
+     *      summary="Get list of products",
+     *      description="Returns list of products",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function index(): Response
     {
