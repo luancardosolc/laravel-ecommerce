@@ -19,7 +19,11 @@ class ProductController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(
+     *              allOf={
+     *                  @OA\Schema(type="array", @OA\Items(ref="#/components/schemas/Product")),
+     *              }
+     *          )
      *      ),
      *      security={{ "apiAuth": {} }}
      *     )
