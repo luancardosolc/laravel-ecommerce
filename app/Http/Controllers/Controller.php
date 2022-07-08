@@ -40,5 +40,14 @@ class Controller extends BaseController
      *     name="Ecommerce",
      *     description="API Endpoints of Ecommerce"
      * )
+     * @OA\SecurityScheme(
+     *     type="http",
+     *     description="Login with email and password to get the authentication token",
+     *     name="Token based Based",
+     *     in="header",
+     *     scheme="bearer",
+     *     bearerFormat="JWT",
+     *     securityScheme="apiAuth",
+     * )
      */
 }

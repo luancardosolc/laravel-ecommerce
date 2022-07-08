@@ -20,15 +20,8 @@ class ProductController extends Controller
      *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
      *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      )
+     *      security={{ "apiAuth": {} }}
      *     )
      */
     public function index(): Response
@@ -87,7 +80,7 @@ class ProductController extends Controller
      */
     public function destroy(int $id): CustomResponse
     {
-        if (!Product::destroy($id)){
+        if (!Product::destroy($id)) {
             return new CustomResponse('Failed to delete the product', false);
         }
 
@@ -100,7 +93,7 @@ class ProductController extends Controller
      */
     public function search(string $name): Response
     {
-        $products = Product::where('name', 'like', '%'.$name.'%')->get();
-        return new CustomResponse('Success',true, $products);
+        $products = Product::where('name', 'like', '%' . $name . '%')->get();
+        return new CustomResponse('Success', true, $products);
     }
 }
