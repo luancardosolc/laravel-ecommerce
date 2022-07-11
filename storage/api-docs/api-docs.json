@@ -122,12 +122,6 @@
             }
         }
     },
-    "tags": [
-        {
-            "name": "Ecommerce",
-            "description": "API Endpoints of Ecommerce"
-        }
-    ],
     "security": [
         []
     ]

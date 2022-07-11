@@ -30,10 +30,6 @@ class Controller extends BaseController
      *      description="Ecommerce API Server"
      * )
      *
-     * @OA\Tag(
-     *     name="Ecommerce",
-     *     description="API Endpoints of Ecommerce"
-     * )
      * @OA\SecurityScheme(
      *     type="http",
      *     description="Login with email and password to get the authentication token",
