@@ -25,12 +25,6 @@ class Controller extends BaseController
      *      )
      * )
      *
-     * @OA\Get(
-     *     path="/",
-     *     description="Home page",
-     *     @OA\Response(response="default", description="Welcome page")
-     * )
-     *
      * @OA\Server(
      *      url=L5_SWAGGER_CONST_HOST,
      *      description="Ecommerce API Server"

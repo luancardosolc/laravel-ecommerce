@@ -19,16 +19,6 @@
         }
     ],
     "paths": {
-        "/": {
-            "get": {
-                "description": "Home page",
-                "responses": {
-                    "default": {
-                        "description": "Welcome page"
-                    }
-                }
-            }
-        },
         "/products": {
             "get": {
                 "tags": [
