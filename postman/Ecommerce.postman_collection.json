@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "7280537f-92ba-4b4c-81fd-1a02adae09d6",
 		"name": "Ecommerce",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3113453"
 	},
 	"item": [
 		{
@@ -40,6 +41,24 @@
 		},
 		{
 			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"}); ",
+							"",
+							"let responseJSON = JSON.parse(responseBody);",
+							"let v_token = _.get(responseJSON, 'token');",
+							"console.log(\"TOKEN: \" + v_token);",
+							"pm.collectionVariables.set(\"var_token\", v_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -54,7 +73,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"User 001\",\n    \"email\": \"user001@teste.com\",\n    \"password\": \"User@001\"\n}",
+					"raw": "{\n    \"email\": \"user001@teste.com\",\n    \"password\": \"User@001\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,21 +91,91 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user001@teste.com\",\n    \"password\": \"User@001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Jul 2022 21:36:49 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 1,\n        \"name\": \"User 001\",\n        \"email\": \"user001@teste.com\",\n        \"email_verified_at\": null,\n        \"created_at\": \"2021-06-20T04:35:45.000000Z\",\n        \"updated_at\": \"2021-06-20T04:35:45.000000Z\"\n    },\n    \"token\": \"7|EKuIvW2pH2fd3gvEPALoopw7Ps8mYsUVPwATWrzj\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Logout",
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "1|RI03RQb6gkM67yyQnKt8uV206ngOEnQ9vlolXrao",
-							"type": "string"
-						}
-					]
-				},
 				"method": "POST",
 				"header": [
 					{
@@ -115,13 +204,104 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"User 001\",\n    \"email\": \"user001@teste.com\",\n    \"password\": \"User@001\",\n    \"password_confirmation\": \"User@001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/logout",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Jul 2022 21:41:17 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Logged out\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Get Products",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 6|j00Sprbw1B2y3MDxe3vR7gTr0KHLS9TdpNfEnWuV",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost/api/products",
 					"host": [
@@ -133,21 +313,87 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get Products",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 6|j00Sprbw1B2y3MDxe3vR7gTr0KHLS9TdpNfEnWuV",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/products",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 08 Jul 2022 00:45:39 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Product One\",\n        \"slug\": \"product-one\",\n        \"description\": \"This is product one\",\n        \"price\": \"99.99\",\n        \"created_at\": \"2021-06-17T22:39:32.000000Z\",\n        \"updated_at\": \"2021-06-17T22:39:32.000000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Product Two\",\n        \"slug\": \"product-two\",\n        \"description\": \"This is product two\",\n        \"price\": \"199.99\",\n        \"created_at\": \"2021-06-19T00:42:20.000000Z\",\n        \"updated_at\": \"2021-06-19T00:42:20.000000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"IPhone 12\",\n        \"slug\": \"iphone-12\",\n        \"description\": \"This is an IPhone 12\",\n        \"price\": \"799.99\",\n        \"created_at\": \"2021-06-19T14:16:14.000000Z\",\n        \"updated_at\": \"2021-06-19T14:16:14.000000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"IPhone 12 Pro\",\n        \"slug\": \"iphone-12-pro\",\n        \"description\": \"This is an IPhone 12 Pro\",\n        \"price\": \"999.99\",\n        \"created_at\": \"2021-06-20T04:43:44.000000Z\",\n        \"updated_at\": \"2021-06-20T04:43:44.000000Z\"\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Create Product",
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "1|RI03RQb6gkM67yyQnKt8uV206ngOEnQ9vlolXrao",
-							"type": "string"
-						}
-					]
-				},
 				"method": "POST",
 				"header": [
 					{
@@ -158,7 +404,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"IPhone 12 Pro\",\n    \"slug\": \"iphone-12-pro\",\n    \"description\": \"This is an IPhone 12 Pro\",\n    \"price\": \"999.99\"\n}",
+					"raw": "{\n    \"name\": \"Product Three\",\n    \"slug\": \"product-three\",\n    \"description\": \"This the Product Three\",\n    \"price\": \"666.99\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -176,7 +422,87 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create Product",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Product Three\",\n    \"slug\": \"product-three\",\n    \"description\": \"This the Product Three\",\n    \"price\": \"666.99\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/products",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Jul 2022 21:40:46 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Product Three\",\n    \"slug\": \"product-three\",\n    \"description\": \"This the Product Three\",\n    \"price\": \"666.99\",\n    \"updated_at\": \"2022-07-11T21:40:46.000000Z\",\n    \"created_at\": \"2022-07-11T21:40:46.000000Z\",\n    \"id\": 6\n}"
+				}
+			]
 		},
 		{
 			"name": "Get Product",
@@ -208,7 +534,86 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get Product",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/products/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"products",
+								"2"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Jul 2022 21:42:53 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"name\": \"Product Two\",\n    \"slug\": \"product-two\",\n    \"description\": \"This is product two\",\n    \"price\": \"199.99\",\n    \"created_at\": \"2021-06-19T00:42:20.000000Z\",\n    \"updated_at\": \"2021-06-19T00:42:20.000000Z\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Search Products",
@@ -241,7 +646,87 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Search Products",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/products/search/ipho",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"products",
+								"search",
+								"ipho"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Jul 2022 21:43:05 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"msg\": \"Success\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"name\": \"IPhone 12\",\n            \"slug\": \"iphone-12\",\n            \"description\": \"This is an IPhone 12\",\n            \"price\": \"799.99\",\n            \"created_at\": \"2021-06-19T14:16:14.000000Z\",\n            \"updated_at\": \"2021-06-19T14:16:14.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"IPhone 12 Pro\",\n            \"slug\": \"iphone-12-pro\",\n            \"description\": \"This is an IPhone 12 Pro\",\n            \"price\": \"999.99\",\n            \"created_at\": \"2021-06-20T04:43:44.000000Z\",\n            \"updated_at\": \"2021-06-20T04:43:44.000000Z\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Update Product",
@@ -256,7 +741,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Product Three\",\n    \"slug\": \"product-three\",\n    \"description\": \"This is product three\",\n    \"price\": \"499.99\"\n}",
+					"raw": "{\n    \"name\": \"Product Two 2\",\n    \"slug\": \"product-two\",\n    \"description\": \"This is product Two\",\n    \"price\": \"499.97\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -264,32 +749,103 @@
 					}
 				},
 				"url": {
-					"raw": "localhost/api/products/3",
+					"raw": "localhost/api/products/2",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"api",
 						"products",
-						"3"
+						"2"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update Product",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Product Two 2\",\n    \"slug\": \"product-two\",\n    \"description\": \"This is product Two\",\n    \"price\": \"499.97\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/products/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"products",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Jul 2022 21:44:18 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"name\": \"Product Two 2\",\n    \"slug\": \"product-two\",\n    \"description\": \"This is product Two\",\n    \"price\": \"499.97\",\n    \"created_at\": \"2021-06-19T00:42:20.000000Z\",\n    \"updated_at\": \"2022-07-11T21:44:18.000000Z\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete Product",
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "1|RI03RQb6gkM67yyQnKt8uV206ngOEnQ9vlolXrao",
-							"type": "string"
-						}
-					]
-				},
 				"method": "DELETE",
 				"header": [
 					{
@@ -299,14 +855,14 @@
 					}
 				],
 				"url": {
-					"raw": "localhost/api/products/4",
+					"raw": "localhost/api/products/6",
 					"host": [
 						"localhost"
 					],
 					"path": [
 						"api",
 						"products",
-						"4"
+						"6"
 					],
 					"query": [
 						{
@@ -317,7 +873,122 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete Product",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/products/6",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"products",
+								"6"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.23.0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.30"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 11 Jul 2022 21:45:06 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"msg\": \"Product has been deleted\",\n    \"data\": []\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{var_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "var_token",
+			"value": ""
 		}
 	]
 }
